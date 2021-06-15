@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    margin-bottom: 300px;
 }
 
 .slide {
@@ -45,4 +50,81 @@
 .info-page p {
     margin: 0;
     padding: 0;
+}
+
+.intro {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.intro p {
+    font-size: 20px;
+    border-left: 1px solid black;
+    padding-left: 30px;
+}
+
+.formulario {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.title-section {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #16A085;
+    color: white;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.title-section h5 {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.title-section i {
+    font-size: 20px;
+}
+
+.inputs {
+    margin: auto;
+    padding-top: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 45px;
+    width: 100%;
+    border: 0.5px solid gray;
+    -webkit-border-bottom-right-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -moz-border-radius-bottomright: 15px;
+    -moz-border-radius-bottomleft: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top: 0;
+}
+
+.inputs .form-group {
+    margin-top: 30px;
+}
+
+.inputs label {
+    font-size: 18px;
+    color: #2980B9;
+    font-weight: 700;
+    margin-bottom: 7px;
 }
