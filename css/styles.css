@@ -30,3 +30,19 @@
     font-family: 'Montserrat', sans-serif;
     text-align: center;
 }
+
+.info-page {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-page p {
+    margin: 0;
+    padding: 0;
+}
