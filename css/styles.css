@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -26,4 +27,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
