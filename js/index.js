@@ -16,7 +16,7 @@ let p = 0
 let sigman = 0
 let bandera
 
-const getProb = () => {
+const getProb = (alumnos, clases) => {
     const ox = rangeval.value / 100
     const age = edad.value
     sigma2 += (1 - ox) * 0.1
@@ -41,7 +41,10 @@ const getProb = () => {
 
     sigman = sigma1 + (sigma2 - sigma1) * (1 - Math.exp(-(n.value - 1) / v))
 
-    p = sigman * (1 - Math.exp((-lambda.value / 100000) * n.value * i.value))
+    if (alumnos === undefined) alumnos = n.value;
+    if (clases === undefined) clases = i.value;
+
+    p = sigman * (1 - Math.exp((-lambda.value / 100000) * alumnos * clases))
 
     sigma2 = 0.1
     v = 10
@@ -74,7 +77,89 @@ form.addEventListener("submit", (e) => {
         Swal.fire({
             icon: "success",
             title: "Resultados",
-            html: `<p>La probabilidad de contagio: ${p} = ${p*100}%</p>`,
+            html: `<p>La probabilidad de contagio: ${(p * 100).toFixed(2)}%</p>
+                <div id="chart_div"></div>
+                <div id="chart2_div"></div>`,
         });
     }
+    graficarAlumnos()
+    graficarClases()
 })
+
+function graficarAlumnos() {
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Probabilidad');
+
+        for (var x = 5; x < 36; x++) {
+            getProb(x, undefined);
+            data.addRow([x, Math.round(p * 100)]);
+            console.log("Insertando data: " + p);
+        }
+
+        // Set chart options
+        var options = {
+            'title': 'Probabilidad por cantidad de alumnos',
+            'width': 800,
+            'height': 800,
+            hAxis: {
+                title: 'Alumnos'
+            },
+            vAxis: {
+                title: 'Probabilidad',
+
+            }
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+}
+
+function graficarClases() {
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            ['Mushrooms', 3],
+            ['Onions', 1],
+            ['Olives', 1],
+            ['Zucchini', 1],
+            ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': 'How Much Pizza I Ate Last Night',
+            'width': 400,
+            'height': 300
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart2_div'));
+        chart.draw(data, options);
+    }
+}
