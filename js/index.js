@@ -76,8 +76,8 @@ form.addEventListener("submit", (e) => {
     if (bandera === 0) {
         Swal.fire({
             icon: "success",
-            title: "Resultados",
-            html: `<p>La probabilidad de contagio: ${(p * 100).toFixed(2)}%</p>
+            title: "La probabilidad de contagio con los datos otorgados: " + (p * 100).toFixed(2) + "% ",
+            html: `
                 <div id="chart_div"></div>
                 <div id="chart2_div"></div>`,
         });
@@ -102,22 +102,31 @@ function graficarAlumnos() {
         data.addColumn('number', 'X');
         data.addColumn('number', 'Probabilidad');
 
-        for (var x = 5; x < 36; x++) {
+        for (var x = 0; x < 50; x++) {
             getProb(x, undefined);
-            data.addRow([x, Math.round(p * 100)]);
+            data.addRow([x, (p * 100)]);
             console.log("Insertando data: " + p);
         }
 
         // Set chart options
         var options = {
             'title': 'Probabilidad por cantidad de alumnos',
-            'width': 800,
-            'height': 800,
+            titleTextStyle: {
+                color: "red",
+                fontSize: 25,
+                bold: true
+            },
+            'width': 900,
+            'height': 700,
+            backgroundColor: '#f1f8e9',
+            lineWidth: 5,
+            colors: ['green'],
             hAxis: {
                 title: 'Alumnos'
             },
             vAxis: {
-                title: 'Probabilidad',
+                title: 'Probabilidad (%)',
+                format: '0.00'
 
             }
         };
@@ -141,25 +150,39 @@ function graficarClases() {
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-            ['Mushrooms', 3],
-            ['Onions', 1],
-            ['Olives', 1],
-            ['Zucchini', 1],
-            ['Pepperoni', 2]
-        ]);
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Probabilidad');
+
+        for (var x = 20; x < 71; x = x + 5) {
+            getProb(undefined, x);
+            data.addRow([x, (p * 100)]);
+            console.log("Insertando data: " + p);
+        }
 
         // Set chart options
         var options = {
-            'title': 'How Much Pizza I Ate Last Night',
-            'width': 400,
-            'height': 300
+            'title': 'Probabilidad por cantidad de clases',
+            titleTextStyle: {
+                color: "red",
+                fontSize: 25,
+                bold: true
+            },
+            'width': 900,
+            'height': 700,
+            lineWidth: 5,
+            colors: ['#167AA0'],
+            hAxis: {
+                title: 'Clases'
+            },
+            vAxis: {
+                title: 'Probabilidad (%)',
+                format: '0.00'
+
+            }
         };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart2_div'));
+        var chart = new google.visualization.LineChart(document.getElementById('chart2_div'));
         chart.draw(data, options);
     }
 }

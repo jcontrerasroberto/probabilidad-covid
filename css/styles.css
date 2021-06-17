@@ -152,3 +152,7 @@ body {
     background-color: #16A085;
     border: 0;
 }
+
+.swal2-popup {
+    width: auto !important;
+}
