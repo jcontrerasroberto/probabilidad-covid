@@ -136,10 +136,10 @@ body {
 
 #rangeval {
     display: inline;
-    margin-left: 50px;
+    margin-left: 10px;
     border: 1px solid blue;
     border-radius: 10px;
-    width: 10%;
+    width: 15%;
 }
 
 .analizar {
